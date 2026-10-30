@@ -1,0 +1,6 @@
+.openai/
+dist/
+output/
+.env
+.env.*
+.DS_Store
