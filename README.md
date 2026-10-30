@@ -1,24 +1,49 @@
-# Make — interactive product demo
+# Make — context-aware shared app demo
 
-A standalone guided demo of the Make.app concept. Published with GitHub Pages.
+A static guided product demo, published at https://adit99.github.io/make-demo/.
 
-## Try it
+The main story turns sample email/calendar context into a structured family pickup planner. Alternate examples show a trip itinerary with a packing list and a household tracker with maintenance tasks.
 
-Open `index.html` directly, or serve this directory with `python3 -m http.server 4173`.
+## Run locally
 
-The demo supports creating a reading tracker, task list, habit tracker, or expense tracker; adding and updating entries; applying prepared edits; and restoring earlier app layouts without removing records. Changes persist in this browser using localStorage. Reset demo restores the original sample content.
+Serve the repository root:
 
-Creation and editing are explicitly simulated. There are no model requests, credentials, backend services, or API costs. Sample history and entries are illustrative. Fonts load from Google Fonts, with system fallbacks when offline.
+```sh
+python3 -m http.server 4173 --bind 127.0.0.1
+```
 
-## Hosting
+Open http://127.0.0.1:4173/. No installation or build step is required. Edit `index.html`, `styles.css`, and `app.js`.
 
-GitHub Pages serves the repository root. Update `index.html` and push to the default branch to publish changes.
+## Main walkthrough
 
-## Verified
+1. Create the pickup planner from the sample family calendar and school-email excerpts.
+2. Inspect card provenance and the selected source context.
+3. Share the app with Sam in the demo, then switch between Alex's full board and Sam's own pickups.
+4. Simulate a school email announcing early dismissal. The schedule remains unchanged until the visitor reviews and applies the proposal.
+5. See the availability conflict, reassign the pickup, and observe the same record in both family views.
+6. Preview and apply an edit that adds backup people and pickup confirmations while retaining all records.
+7. Reopen the demo or restore an earlier layout: the records persist.
 
-- Reading app creation, sample book, and progress update.
-- Notes and theme edit preserve the book and progress.
-- Reload preserves apps, records, and notes.
-- Restoring a layout preserves current records.
+## Other examples
 
-This demo is independent of the native Expo app repository.
+- **Weekend away:** sample reservations and calendar events become an itinerary; visitors can complete packing tasks, add items, assign people, inspect sources, and add reservation-code and note fields.
+- **Home file:** sample receipts and service reminders become appliance records and maintenance tasks; visitors can complete and assign tasks and add serial-number and note fields.
+
+## What is simulated
+
+People, source excerpts, calendar availability, invitations, generation, and external updates are prepared demo data. Family-view switching demonstrates shared state in one browser; it is not authenticated, cross-device collaboration. No emails, calendar changes, invitations, bookings, or model requests are sent. Sources are fixed illustrative snapshots, not live accounts.
+
+App records and interface versions persist in localStorage under `make-context-demo-v2`. A reset affects only that demo state in the current browser. Private source accounts are never connected. No credentials or backend are included. Google Fonts loads optional typefaces, with system-font fallbacks.
+
+## Publishing
+
+GitHub Pages serves the default branch at its root. Commit and push the three app files and any documentation updates. `.openai`, `dist`, `output`, and environment files are ignored and not published.
+
+## Validation
+
+- JavaScript syntax check (`node --check app.js`).
+- Browser walkthrough: creation, sharing, both family views, pending source update, conflict detection, reassignment, preview/apply edit, backup field, pickup confirmation, reload persistence, and layout restore.
+- Trip packing completion and item creation.
+- Household task completion and source inspection.
+
+The demo is independent of the native Expo app repository.
