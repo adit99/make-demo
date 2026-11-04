@@ -712,3 +712,22 @@ h2 {
   .plan-actions { font-size: 20px; line-height: 1.5; }
   .plan-evolution { font-size: 17px; line-height: 1.5; }
 }
+
+.instinct-slide { display: grid; grid-template-columns: .66fr 1.34fr; gap: 40px; align-items: center; }
+.instinct-slide h2 { font-size: clamp(38px, 4.1vw, 58px); line-height: 1.12; }
+.instinct-slide .family-bridge { font-size: 20px; line-height: 1.6; }
+.instinct-evidence a { display: flex; justify-content: center; }
+.instinct-evidence img { display: block; max-width: 100%; max-height: calc(100svh - 220px); width: auto; height: auto; border-radius: 8px; border: 1px solid #e0e6da; }
+.instinct-evidence figcaption { font-size: 11px; color: #87967b; margin-top: 12px; text-align: center; }
+@media(max-width: 850px) {
+ .instinct-slide { grid-template-columns: 1fr; gap: 25px; }
+ .instinct-slide h2 br { display: none; }
+ .instinct-slide .family-bridge { margin-top: 20px; font-size: 18px; }
+ .instinct-evidence img { max-height: none; width: 100%; }
+}
+@media print {
+ .instinct-slide, .instinct-slide[hidden] { display: grid !important; grid-template-columns: .66fr 1.34fr; gap: 25px; }
+ .instinct-evidence img { max-height: 145mm; }
+ .instinct-slide h2 { font-size: 31pt; }
+ .instinct-slide .family-bridge { font-size: 15pt; }
+}

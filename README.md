@@ -28,4 +28,4 @@ GitHub Pages serves the root of `main`. Build, replace generated root assets wit
 
 Tests verify empty creation and unconstrained name fields, then cover all semester occurrences, closures, overlapping events, prompt-to-field changes, edited data preservation, source enrichment and idempotent import.
 
-The family-assistant screenshot is not published. Only two anonymous excerpts appear; the child’s name, school, spending and other identifying details are excluded.
+The family-context slide uses the actual Family Instinct screenshot supplied by Aditya for the public deck. It shows expenses, reminders and school coordination mixed in one thread; the next slide illustrates how those messages become a structured shared plan.
