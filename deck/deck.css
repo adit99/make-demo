@@ -501,3 +501,197 @@ h2 {
     padding-bottom: 24px;
   }
 }
+.family-today {
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+.family-today h2 {
+  font-size: clamp(36px, 4.1vw, 58px);
+  letter-spacing: -2px;
+}
+.family-today .eyebrow {
+  margin-bottom: 18px;
+}
+.family-evidence {
+  display: grid;
+  grid-template-columns: 1.08fr 0.92fr;
+  gap: 48px;
+  align-items: center;
+  margin-top: 28px;
+}
+.family-evidence figcaption,
+.evidence-label,
+.lovable-pair figcaption {
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  color: #849675;
+  margin-bottom: 15px;
+}
+.family-evidence img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+.assistant-excerpts blockquote {
+  font-size: 23px;
+  line-height: 1.45;
+  letter-spacing: -0.4px;
+  margin: 0 0 20px;
+  padding: 0;
+}
+.assistant-excerpts blockquote + blockquote {
+  color: #718866;
+}
+.excerpt-note {
+  font-size: 11px;
+  color: #87967b;
+  line-height: 1.6;
+}
+.family-bridge {
+  font-size: 20px;
+  color: #5c7550;
+  margin-top: 30px;
+  line-height: 1.5;
+}
+.lovable-slide {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.lovable-slide h2 {
+  font-size: clamp(32px, 3.35vw, 48px);
+  letter-spacing: -1.8px;
+  line-height: 1.2;
+}
+.lovable-pair {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 42px;
+  align-items: center;
+  margin: 24px 0 16px;
+}
+.lovable-post {
+  text-align: center;
+}
+.app-post-window {
+  display: block;
+  width: 285px;
+  max-width: 100%;
+  aspect-ratio: 1170/1640;
+  overflow: hidden;
+  margin: auto;
+  border: 1px solid #e0e5dc;
+  border-radius: 7px;
+  background: white;
+}
+.app-post-window img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transform: translateY(-13%);
+}
+.lovable-comment .comment-window {
+  width: 100%;
+}
+.lovable-slide > .image-credit {
+  margin-top: 0;
+}
+.lovable-comment .comment-caption {
+  font-size: 11px;
+}
+@media (max-width: 850px) {
+  .family-evidence {
+    gap: 28px;
+  }
+  .assistant-excerpts blockquote {
+    font-size: 19px;
+  }
+  .family-bridge {
+    font-size: 18px;
+  }
+  .lovable-pair {
+    gap: 24px;
+    grid-template-columns: 1fr 1fr;
+  }
+  .app-post-window {
+    width: 260px;
+  }
+  .lovable-slide {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+  .lovable-pair figcaption {
+    font-size: 9px;
+    letter-spacing: 1px;
+  }
+}
+@media (max-width: 600px) {
+  .family-evidence {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+  .family-today h2 {
+    font-size: 38px;
+  }
+  .assistant-excerpts blockquote {
+    font-size: 21px;
+  }
+  .lovable-pair {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  .lovable-post {
+    text-align: left;
+  }
+  .app-post-window {
+    margin: 0;
+    width: 275px;
+  }
+  .lovable-slide h2 {
+    font-size: 35px;
+  }
+  .family-bridge {
+    font-size: 18px;
+    margin-top: 25px;
+  }
+}
+@media print {
+  .family-evidence {
+    gap: 25px;
+    margin-top: 25px;
+  }
+  .family-today h2 {
+    font-size: 31pt;
+  }
+  .assistant-excerpts blockquote {
+    font-size: 17pt;
+  }
+  .family-bridge {
+    font-size: 15pt;
+  }
+  .lovable-slide h2 {
+    font-size: 27pt;
+  }
+  .lovable-pair {
+    margin: 20px 0 12px;
+    gap: 30px;
+  }
+  .app-post-window {
+    width: 68mm;
+  }
+  .lovable-pair figcaption {
+    font-size: 8pt;
+  }
+  .lovable-comment .comment-caption {
+    font-size: 8pt;
+  }
+  .family-evidence figcaption,
+  .evidence-label {
+    font-size: 8pt;
+  }
+}
+.lovable-comment {
+  max-width: 560px;
+  width: 100%;
+  justify-self: center;
+}

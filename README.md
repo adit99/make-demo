@@ -10,7 +10,7 @@ One family planner, three moments:
 
 This public React/OpenUI demo uses prepared AI output and limited prompt routing, not live model calls or arbitrary prompt generation. Supported edit requests add backup, location and notes fields. CRUD, schema migration, recurrence expansion, filtering and local persistence work. Sharing is a labeled simulation. The separate `adit99/make.app` prototype has real model calls, SQLite and invitations.
 
-The four-slide deck identifies the AI hobbyist, presents the generative UI thesis, centers the user-supplied publishing-friction comment with one Lovable app screenshot as context, and explains apps in one shared product. Chat, live email and SMS remain future direction.
+The five-slide deck identifies the AI hobbyist, shows current family coordination through a pickup-chat screenshot and anonymous assistant-thread excerpts, presents the generative UI thesis, places the Lovable app post and publishing-friction comment side by side, and explains apps in one shared product. Chat, live email and SMS remain future direction.
 
 ## Develop
 
@@ -27,3 +27,5 @@ Source: `site/src`. Deck: `site/public/deck`. Fictional email: `site/public/exam
 GitHub Pages serves the root of `main`. Build, replace generated root assets with `dist/` contents, then commit and push. Keep `.nojekyll`. Never include environment files or backend keys.
 
 Tests verify empty creation and unconstrained name fields, then cover all semester occurrences, closures, overlapping events, prompt-to-field changes, edited data preservation, source enrichment and idempotent import.
+
+The family-assistant screenshot is not published. Only two anonymous excerpts appear; the child’s name, school, spending and other identifying details are excluded.
