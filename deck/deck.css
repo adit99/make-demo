@@ -695,3 +695,20 @@ h2 {
   width: 100%;
   justify-self: center;
 }
+
+.shared-plan { padding-top: 24px; padding-bottom: 24px; }
+.shared-plan h2 { font-size: clamp(46px, 5.1vw, 70px); }
+.plan-table-wrap { margin-top: 30px; overflow-x: auto; }
+.plan-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 20px; }
+.plan-table caption { caption-side: bottom; text-align: left; font-size: 11px; color: #87967b; padding-top: 12px; }
+.plan-table th, .plan-table td { padding: 19px 20px 19px 0; border-bottom: 1px solid #dbe3d3; }
+.plan-table thead th { font-size: 12px; text-transform: uppercase; letter-spacing: 1.3px; color: #76866b; font-weight: 500; }
+.plan-table tbody th { font-weight: 500; }
+.plan-table .missing { color: #89917e; }
+.plan-actions { font-size: 22px; margin-top: 28px; }
+.plan-evolution { font-size: 19px; color: #76866b; margin-top: 12px; }
+@media(max-width: 650px) {
+  .plan-table { font-size: 16px; min-width: 560px; }
+  .plan-actions { font-size: 20px; line-height: 1.5; }
+  .plan-evolution { font-size: 17px; line-height: 1.5; }
+}

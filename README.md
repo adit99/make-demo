@@ -10,7 +10,7 @@ One family planner, three moments:
 
 This public React/OpenUI demo uses prepared AI output and limited prompt routing, not live model calls or arbitrary prompt generation. Supported edit requests add backup, location and notes fields. CRUD, schema migration, recurrence expansion, filtering and local persistence work. Sharing is a labeled simulation. The separate `adit99/make.app` prototype has real model calls, SQLite and invitations.
 
-The five-slide deck identifies the AI hobbyist, shows current family coordination through a pickup-chat screenshot and anonymous assistant-thread excerpts, presents the generative UI thesis, places the Lovable app post and publishing-friction comment side by side, and explains apps in one shared product. Chat, live email and SMS remain future direction.
+The six-slide deck identifies the AI hobbyist, shows that family coordination still lives in messages even with an assistant, illustrates a shared structured plan using details from those messages, then explains generative UI as the technical enablement. The Lovable app post and publishing-friction comment remain side by side, followed by apps in one shared product. Chat, live email and SMS remain future direction.
 
 ## Develop
 
