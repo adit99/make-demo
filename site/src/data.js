@@ -1,5 +1,5 @@
 export const CREATE_PROMPT =
-  "Make a weekly school pickup and after-school planner for Maya and Leo.";
+  "Make a weekly school pickup and after-school planner.";
 export const EDIT_PROMPT = "Add a backup person and a pickup location.";
 export const EMAIL = `From: Oakwood School Office <office@oakwood.example>
 To: Alex & Sam <family@example.com>
@@ -132,25 +132,15 @@ export const SPECIAL = [
 ];
 export const BASE_FIELDS = [
   { key: "title", label: "Activity", type: "text" },
-  {
-    key: "child",
-    label: "Child",
-    type: "select",
-    options: ["Maya", "Leo", "Maya & Leo"],
-  },
+  { key: "child", label: "Child", type: "text" },
   { key: "date", label: "Date", type: "date" },
   { key: "time", label: "Starts", type: "time" },
   { key: "endtime", label: "Ends / pickup", type: "time" },
-  {
-    key: "person",
-    label: "Pickup person",
-    type: "select",
-    options: ["Alex", "Sam"],
-  },
+  { key: "person", label: "Pickup person", type: "text" },
   { key: "done", label: "Done", type: "checkbox" },
 ];
 export const EXTRA_FIELDS = [
-  { key: "backup", label: "Backup", type: "select", options: ["Alex", "Sam"] },
+  { key: "backup", label: "Backup", type: "text" },
   { key: "location", label: "Pickup location", type: "text" },
 ];
 export const TIME_FIELDS = [
@@ -217,13 +207,7 @@ export function migrate(records, fields) {
     return next;
   });
 }
-export const INITIAL_RECORDS = semesterRecords()
-  .filter((r) => r.date <= "2027-01-15")
-  .map((r) =>
-    Object.fromEntries(
-      ["id", ...BASE_FIELDS.map((f) => f.key)].map((key) => [key, r[key]]),
-    ),
-  );
+export const INITIAL_RECORDS = [];
 export function importSemester(records) {
   const incoming = semesterRecords();
   const byId = new Map(incoming.map((r) => [r.id, r]));
@@ -239,7 +223,7 @@ export function importSemester(records) {
   return [...kept, ...incoming.filter((r) => !ids.has(r.id))];
 }
 export const programs = {
-  1: 'root = AppScreen([items])\nitems = Records("January 11–15", "table")',
-  2: 'root = AppScreen([items])\nitems = Records("January 11–15", "table")',
+  1: 'root = AppScreen([items])\nitems = Records("Weekly planner", "table")',
+  2: 'root = AppScreen([items])\nitems = Records("Weekly planner", "table")',
   3: 'root = AppScreen([months, items])\nmonths = MonthFilter("Semester")\nitems = Records("Spring semester", "table")',
 };

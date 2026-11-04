@@ -410,3 +410,94 @@ h2 {
     font-size: 14pt;
   }
 }
+.publishing-evidence {
+  min-width: 0;
+}
+.comment-window {
+  display: block;
+  aspect-ratio: 1170/820;
+  overflow: hidden;
+  border-radius: 8px;
+  background: white;
+  border: 1px solid #e0e5dc;
+}
+.comment-window img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transform: translateY(-50%);
+}
+.comment-caption {
+  font-size: 12px;
+  color: #788a6d;
+  margin-top: 12px;
+  line-height: 1.5;
+}
+.post-context {
+  display: flex;
+  align-items: center;
+  gap: 17px;
+  margin: 24px 0 15px;
+}
+.post-context > a {
+  width: 85px;
+  height: 105px;
+  overflow: hidden;
+  border-radius: 5px;
+  flex-shrink: 0;
+}
+.post-context img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 40%;
+}
+.post-context figcaption {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #4f6b43;
+}
+.post-context figcaption span {
+  font-size: 12px;
+  color: #8a997c;
+}
+@media (max-width: 850px) {
+  .publishing-evidence {
+    max-width: 600px;
+  }
+  .post-context {
+    margin-top: 18px;
+  }
+  .post-context > a {
+    width: 70px;
+    height: 85px;
+  }
+}
+@media print {
+  .post-context > a {
+    height: 24mm;
+    width: 20mm;
+  }
+  .comment-caption {
+    font-size: 9pt;
+  }
+  .post-context {
+    margin: 15px 0;
+  }
+}
+.comment-window {
+  aspect-ratio: 1170/780;
+}
+.post-context {
+  margin: 16px 0 8px;
+}
+.post-context > a {
+  width: 52px;
+  height: 64px;
+}
+@media (min-width: 851px) and (max-height: 820px) {
+  .distribution {
+    padding-top: 24px;
+    padding-bottom: 24px;
+  }
+}

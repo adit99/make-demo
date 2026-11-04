@@ -41,7 +41,7 @@ import {
   programs,
 } from "./data.js";
 import "./style.css";
-const KEY = "make-family-v5";
+const KEY = "make-family-v6";
 const fresh = () => ({
   version: 0,
   records: [],
@@ -167,8 +167,11 @@ function RecordsView({ title }) {
                 onChange={(e) => setChild(e.target.value)}
               >
                 <option value="all">Everyone</option>
-                <option>Maya</option>
-                <option>Leo</option>
+                {[
+                  ...new Set(data.records.map((r) => r.child).filter(Boolean)),
+                ].map((name) => (
+                  <option key={name}>{name}</option>
+                ))}
               </select>
             )}
             <select
@@ -252,9 +255,7 @@ function RecordsView({ title }) {
                   }
                 </td>
                 <td>
-                  <span className={`person ${r.person === "Sam" ? "sam" : ""}`}>
-                    {r.person || "Unassigned"}
-                  </span>
+                  <span className="person">{r.person || "Unassigned"}</span>
                 </td>
                 {hasField("backup") && (
                   <td className="backup">{r.backup || "—"}</td>
@@ -280,7 +281,11 @@ function RecordsView({ title }) {
           </tbody>
         </table>
         {!rows.length && (
-          <div className="empty-table">No items match these filters.</div>
+          <div className="empty-table">
+            {data.records.length
+              ? "No items match these filters."
+              : "Add a pickup or attach your school email."}
+          </div>
         )}
       </div>
       <div className="pagination">
@@ -288,7 +293,7 @@ function RecordsView({ title }) {
           {rows.length
             ? `${(Math.min(page, pages) - 1) * 12 + 1}–${Math.min(Math.min(page, pages) * 12, rows.length)} of ${rows.length} items`
             : "0 items"}
-          {viewer === "Sam" ? " · Sam’s shared view" : ""}
+          {viewer === "Family member" ? " · Family member’s view" : ""}
         </span>
         <div>
           <button
@@ -412,7 +417,7 @@ function App() {
   const [month, setMonth] = useState("all");
   const [modal, setModal] = useState("");
   const [editing, setEditing] = useState(null);
-  const [viewer, setViewer] = useState("Alex");
+  const [viewer, setViewer] = useState("You");
   const [toast, setToast] = useState("");
   const [storageError, setStorageError] = useState(false);
   useEffect(() => {
@@ -431,7 +436,7 @@ function App() {
   function build() {
     if (!/school|pick.?up|after.?school/i.test(prompt)) {
       setPromptError(
-        "This guided demo makes Maya and Leo’s school planner. Try the sample prompt.",
+        "This guided demo makes a school pickup planner. Try the sample prompt.",
       );
       return;
     }
@@ -520,7 +525,7 @@ function App() {
               onClick={() => setModal("share")}
             >
               <Users size={16} />
-              {data.shared ? "Shared with Sam" : "Share"}
+              {data.shared ? "Shared · demo" : "Share"}
             </button>
           )}
         </div>
@@ -566,7 +571,7 @@ function App() {
         {data.shared && (
           <div className="shared-strip">
             <span>Viewing as</span>
-            {["Alex", "Sam"].map((p) => (
+            {["You", "Family member"].map((p) => (
               <button
                 key={p}
                 onClick={() => setViewer(p)}
@@ -642,7 +647,7 @@ function App() {
         />
       )}
       {modal === "share" && (
-        <Modal title="Share with Sam" onClose={() => setModal("")}>
+        <Modal title="Share this planner" onClose={() => setModal("")}>
           <p>
             Try another family member’s view. Sharing is simulated in this demo.
           </p>
@@ -651,11 +656,11 @@ function App() {
               className="button"
               onClick={() => {
                 setData({ ...data, shared: !data.shared });
-                setViewer(data.shared ? "Alex" : "Sam");
+                setViewer(data.shared ? "You" : "Family member");
                 setModal("");
               }}
             >
-              {data.shared ? "Stop sharing" : "Try Sam’s view"}
+              {data.shared ? "Stop sharing" : "Try the shared view"}
             </button>
           </div>
         </Modal>
@@ -675,7 +680,7 @@ function App() {
                 setPromptError("");
                 setModal("");
                 setMonth("all");
-                setViewer("Alex");
+                setViewer("You");
               }}
             >
               Reset demo
