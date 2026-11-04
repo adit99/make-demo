@@ -1,18 +1,12 @@
-# Make — three progressive demos
+# Make
 
-[Interactive demo](https://adit99.github.io/make-demo/) · [Five-slide deck](https://adit99.github.io/make-demo/deck/)
+[Demo](https://adit99.github.io/make-demo/) · [Three-page deck](https://adit99.github.io/make-demo/deck/)
 
-A React/OpenUI guided demonstration of one app becoming more useful:
+One table, three actions: make a checklist, add child and backup fields, attach a fictional school email. The email supplies 70 dated semester events, with breaks excluded. Existing items and edits are preserved.
 
-1. **Make an app:** a school checklist with a summary, table, four typed fields, and working controls.
-2. **Change its data model:** add child, type, location, and backup fields. Preserve IDs, values, completion status, and edits; initialize new fields explicitly.
-3. **Build from context:** attach a manufactured semester email. Expand four recurring activities, three one-off events, and holiday/break exclusions into **70 dated events** from January through May 2027. Keep existing tasks.
+React and OpenUI render prepared outputs. CRUD, schema changes, recurrence expansion, search and filters work locally. Data persists in this browser. Sharing is a labeled simulation. There are no live model calls or inbox connections in the public demo. The separate `adit99/make.app` prototype has real model calls, SQLite and invitations.
 
-The public demo uses prepared OpenUI programs, fictional data, and browser local storage. Editing, filtering, pagination, recurrence expansion and schema migration run locally. The family-view switch is explicitly simulated. No API calls, keys, live inboxes, or cross-device collaboration are included here. Use **Start again** to reset the guided example.
-
-The separate `adit99/make.app` React prototype has real model generation/editing, email import, SQLite persistence, and app-scoped invitations. GitHub Pages cannot host its API/database.
-
-The deck leads with structured UX and describes agents, chat, live email and SMS as product direction. It is a lightweight conversation aid with demo links, arrow-key navigation and print styles.
+The deck uses two user-supplied Lovable screenshots (Frogs in Mugs and FRIDG) to discuss building versus distribution. Original images are linked from the slide. The Make idea is apps in one shared product, with structured UI at the core. Chat, live email and SMS remain future direction.
 
 ## Develop
 
@@ -24,12 +18,8 @@ npm run build
 python3 -m http.server 4174 --directory dist
 ```
 
-React source: `site/src`. Browser deck: `site/public/deck`. Sample email: `site/public/examples/spring-semester.eml`.
+Source: `site/src`. Deck: `site/public/deck`. Sample email: `site/public/examples/spring-semester.eml`. Vite serves the deck at `/deck/index.html`; the static build supports `/deck/`.
 
-Vite development serves the deck at `/deck/index.html`; the built static site supports `/deck/`.
+GitHub Pages serves the root of `main`. Build, replace generated root assets with `dist/` contents, then commit and push. Keep `.nojekyll`. Never include environment files or backend keys.
 
-## Publish
-
-GitHub Pages serves the root of `main`. Run `npm run build`, copy the contents of `dist/` to the repository root, and commit the generated `index.html`, `assets/`, `deck/`, `examples/`, and `icon.svg` alongside source changes. Keep `.nojekyll`. Do not publish environment files or a backend key.
-
-Tests verify all 70 occurrences, exclusions, simultaneous events on May 20, record preservation, and idempotent imports. Browser QA covers the three-step flow, editing, reload persistence, the final month, and the deck.
+Tests cover the complete semester, breaks, two events on May 20, data preservation and duplicate prevention.

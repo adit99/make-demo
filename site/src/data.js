@@ -128,23 +128,18 @@ export const EXTRA_FIELDS = [
     type: "select",
     options: ["Maya", "Leo", "Maya & Leo"],
   },
+  { key: "backup", label: "Backup", type: "select", options: ["Alex", "Sam"] },
+];
+export const TIME_FIELDS = [
+  { key: "time", label: "Starts", type: "time" },
+  { key: "endtime", label: "Ends", type: "time" },
+  { key: "location", label: "Location", type: "text" },
   {
     key: "category",
     label: "Type",
     type: "select",
     options: ["Task", "Club", "Sport", "Event"],
   },
-  { key: "location", label: "Location", type: "text" },
-  {
-    key: "backup",
-    label: "Backup person",
-    type: "select",
-    options: ["Alex", "Sam"],
-  },
-];
-export const TIME_FIELDS = [
-  { key: "time", label: "Starts", type: "time" },
-  { key: "endtime", label: "Ends", type: "time" },
 ];
 export const INITIAL_RECORDS = [
   {
@@ -215,7 +210,7 @@ export function importSemester(records) {
   return [...records, ...semesterRecords().filter((r) => !ids.has(r.id))];
 }
 export const programs = {
-  1: 'root = AppScreen([summary, items])\nsummary = Summary("Our school checklist")\nitems = Records("A few things to do", "table")',
-  2: 'root = AppScreen([summary, fields, items])\nsummary = Summary("Our school planner")\nfields = FieldLegend("A richer data model")\nitems = Records("Tasks & activities", "table")',
-  3: 'root = AppScreen([summary, months, items])\nsummary = Summary("Spring semester · 2027")\nmonths = MonthFilter("Explore the whole semester")\nitems = Records("The family schedule", "table")',
+  1: 'root = AppScreen([items])\nitems = Records("To do", "table")',
+  2: 'root = AppScreen([items])\nitems = Records("To do", "table")',
+  3: 'root = AppScreen([months, items])\nmonths = MonthFilter("Semester")\nitems = Records("Spring 2027", "table")',
 };
