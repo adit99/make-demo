@@ -1,35 +1,28 @@
+export const CREATE_PROMPT =
+  "Make a weekly school pickup and after-school planner for Maya and Leo.";
+export const EDIT_PROMPT = "Add a backup person and a pickup location.";
 export const EMAIL = `From: Oakwood School Office <office@oakwood.example>
 To: Alex & Sam <family@example.com>
 Date: Tue, 05 Jan 2027 09:00:00 -0500
-Subject: Maya & Leo — Spring 2027 semester activities and pickup schedule
+Subject: A few things for Maya and Leo's spring semester
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 
-FICTIONAL EMAIL FOR THE MAKE PRODUCT DEMO. All people, school details and events below are illustrative.
+FICTIONAL EMAIL FOR THE MAKE PRODUCT DEMO.
 
 Hello Alex and Sam,
 
-Here is Maya and Leo's activity schedule for the entire spring semester, January 11 through May 21, 2027, inclusive. All times are local school time.
+I wanted to put everything for the spring semester in one email before we start on January 11. These arrangements run through May 21, 2027, inclusive, and all times are local school time.
 
-WEEKLY ACTIVITIES
-Every Monday: Maya — Chess club, 3:30–4:30 pm, Library. Sam handles pickup.
-Every Tuesday: Leo — Soccer practice, 4:00–5:00 pm, West field. Alex handles pickup.
-Every Wednesday: Maya — Robotics club, 3:30–5:00 pm, Science lab. Alex handles pickup.
-Every Thursday: Leo — Art studio, 3:15–4:15 pm, Art room. Sam handles pickup.
-There are no regular Friday activities in this email.
+Maya has chess in the library on Mondays from 3:30 to 4:30 pm, with Sam picking her up there afterwards. Her Wednesday robotics club is in the science lab, 3:30 to 5 pm, and Alex is doing that pickup. Leo's soccer is every Tuesday on the west field from 4 to 5 pm, with Alex collecting him. On Thursdays he'll be in the art room from 3:15 to 4:15 pm for art studio; Sam will pick him up.
 
-NO ACTIVITIES ON THESE DATES
-January 18: school holiday. No clubs or practices.
-February 15–19 inclusive: winter break. No clubs or practices.
-April 12–16 inclusive: spring break. No clubs or practices.
-These exceptions apply to all the weekly activities above.
+For the ordinary school pickups, Leo leaves at 3 pm on Mondays and Wednesdays with Alex, and Maya leaves at 3 pm on Tuesdays and Thursdays with Sam. On Fridays, Sam collects both children together at 3 pm. All those regular pickups are at the main gate. There are no Friday clubs. On club days, the activity's end time is the pickup time at that activity's location.
 
-ONE-OFF EVENTS
-March 11: Maya — Science fair, 6:00–7:30 pm, School hall. Alex is attending.
-May 14: Maya and Leo — Field day, 1:00–3:00 pm, Sports field. Sam is attending.
-May 20: Maya and Leo — Spring concert, 6:00–7:00 pm, Auditorium. Alex is attending. Leo's regular art studio still takes place that afternoon.
+One thing to watch: there's no school or any of these activities on January 18. We're also closed February 15 through 19 for winter break and April 12 through 16 for spring break, inclusive, so please skip both pickups and clubs during those dates.
 
-Please keep the weekly activities, breaks, and one-off events together so the family can plan the whole semester. We have not specified backup people; please leave those unassigned.
+A few extra dates for the calendar: Maya's science fair is March 11, 6 to 7:30 pm in the school hall, and Alex is attending. Field day for both children is May 14 from 1 to 3 pm on the sports field, with Sam attending. Both children are in the spring concert on May 20, 6 to 7 pm in the auditorium, with Alex attending. Leo's art studio still happens that afternoon, so please keep both events.
+
+We haven't arranged backup people yet. Could you leave those blank for now? If you turn this into the family planner, please include the whole semester and keep any pickup arrangements you've already edited.
 
 Warmly,
 Oakwood School Office
@@ -42,7 +35,26 @@ export const BREAKS = [
   { start: "2027-04-12", end: "2027-04-16", label: "Spring break" },
 ];
 export const RULES = [
+  ...[
+    ["pickup-leo-mon", 1, "Leo", "Alex"],
+    ["pickup-maya-tue", 2, "Maya", "Sam"],
+    ["pickup-leo-wed", 3, "Leo", "Alex"],
+    ["pickup-maya-thu", 4, "Maya", "Sam"],
+    ["pickup-both-fri", 5, "Maya & Leo", "Sam"],
+  ].map(([id, weekday, child, person]) => ({
+    id,
+    weekday,
+    child,
+    person,
+    title: "School pickup",
+    time: "15:00",
+    endtime: "",
+    location: "Main gate",
+    category: "Pickup",
+  })),
+
   {
+    id: "chess",
     weekday: 1,
     title: "Chess club",
     child: "Maya",
@@ -53,6 +65,7 @@ export const RULES = [
     category: "Club",
   },
   {
+    id: "soccer",
     weekday: 2,
     title: "Soccer practice",
     child: "Leo",
@@ -63,6 +76,7 @@ export const RULES = [
     category: "Sport",
   },
   {
+    id: "robotics",
     weekday: 3,
     title: "Robotics club",
     child: "Maya",
@@ -73,6 +87,7 @@ export const RULES = [
     category: "Club",
   },
   {
+    id: "art",
     weekday: 4,
     title: "Art studio",
     child: "Leo",
@@ -116,54 +131,51 @@ export const SPECIAL = [
   },
 ];
 export const BASE_FIELDS = [
-  { key: "title", label: "Task", type: "text" },
-  { key: "date", label: "Date", type: "date" },
-  { key: "person", label: "Who", type: "select", options: ["Alex", "Sam"] },
-  { key: "done", label: "Done", type: "checkbox" },
-];
-export const EXTRA_FIELDS = [
+  { key: "title", label: "Activity", type: "text" },
   {
     key: "child",
     label: "Child",
     type: "select",
     options: ["Maya", "Leo", "Maya & Leo"],
   },
+  { key: "date", label: "Date", type: "date" },
+  { key: "time", label: "Starts", type: "time" },
+  { key: "endtime", label: "Ends / pickup", type: "time" },
+  {
+    key: "person",
+    label: "Pickup person",
+    type: "select",
+    options: ["Alex", "Sam"],
+  },
+  { key: "done", label: "Done", type: "checkbox" },
+];
+export const EXTRA_FIELDS = [
   { key: "backup", label: "Backup", type: "select", options: ["Alex", "Sam"] },
+  { key: "location", label: "Pickup location", type: "text" },
 ];
 export const TIME_FIELDS = [
-  { key: "time", label: "Starts", type: "time" },
-  { key: "endtime", label: "Ends", type: "time" },
-  { key: "location", label: "Location", type: "text" },
   {
     key: "category",
     label: "Type",
     type: "select",
-    options: ["Task", "Club", "Sport", "Event"],
+    options: ["Pickup", "Club", "Sport", "Event"],
   },
 ];
-export const INITIAL_RECORDS = [
-  {
-    id: "task-books",
-    title: "Return library books",
-    date: "2027-01-08",
-    person: "Alex",
-    done: false,
-  },
-  {
-    id: "task-conference",
-    title: "Book spring conferences",
-    date: "2027-01-09",
-    person: "Sam",
-    done: false,
-  },
-  {
-    id: "task-art",
-    title: "Buy art supplies",
-    date: "2027-01-10",
-    person: "Alex",
-    done: true,
-  },
-];
+export const NOTE_FIELD = { key: "notes", label: "Notes", type: "text" };
+export function editFields(prompt, previous) {
+  if (/\b(remove|delete|drop|rename)\b/i.test(prompt))
+    throw new Error("This demo can add backup, pickup location, or notes.");
+  const additions = [
+    /backup|back.up|fallback/i.test(prompt) && EXTRA_FIELDS[0],
+    /location|place|where|pickup spot/i.test(prompt) && EXTRA_FIELDS[1],
+    /notes?|instructions/i.test(prompt) && NOTE_FIELD,
+  ]
+    .filter(Boolean)
+    .filter((f) => !previous.some((p) => p.key === f.key));
+  if (!additions.length)
+    throw new Error("Try adding a backup person, pickup location, or notes.");
+  return [...previous, ...additions];
+}
 export function semesterRecords() {
   const records = [];
   for (
@@ -175,9 +187,9 @@ export function semesterRecords() {
       date = d.toISOString().slice(0, 10);
     if (BREAKS.some((b) => date >= b.start && date <= b.end)) continue;
     for (const rule of RULES.filter((r) => r.weekday === d.getUTCDay())) {
-      const { weekday, ...values } = rule;
+      const { weekday, id, ...values } = rule;
       records.push({
-        id: `semester-${date}-${weekday}`,
+        id: `semester-${date}-${id}`,
         ...values,
         date,
         done: false,
@@ -205,12 +217,29 @@ export function migrate(records, fields) {
     return next;
   });
 }
+export const INITIAL_RECORDS = semesterRecords()
+  .filter((r) => r.date <= "2027-01-15")
+  .map((r) =>
+    Object.fromEntries(
+      ["id", ...BASE_FIELDS.map((f) => f.key)].map((key) => [key, r[key]]),
+    ),
+  );
 export function importSemester(records) {
+  const incoming = semesterRecords();
+  const byId = new Map(incoming.map((r) => [r.id, r]));
   const ids = new Set(records.map((r) => r.id));
-  return [...records, ...semesterRecords().filter((r) => !ids.has(r.id))];
+  const kept = records.map((r) => {
+    const fromEmail = byId.get(r.id);
+    if (!fromEmail) return r;
+    const merged = { ...fromEmail, ...r, source: fromEmail.source };
+    for (const key of ["location", "category"])
+      if (!r[key]) merged[key] = fromEmail[key];
+    return merged;
+  });
+  return [...kept, ...incoming.filter((r) => !ids.has(r.id))];
 }
 export const programs = {
-  1: 'root = AppScreen([items])\nitems = Records("To do", "table")',
-  2: 'root = AppScreen([items])\nitems = Records("To do", "table")',
-  3: 'root = AppScreen([months, items])\nmonths = MonthFilter("Semester")\nitems = Records("Spring 2027", "table")',
+  1: 'root = AppScreen([items])\nitems = Records("January 11–15", "table")',
+  2: 'root = AppScreen([items])\nitems = Records("January 11–15", "table")',
+  3: 'root = AppScreen([months, items])\nmonths = MonthFilter("Semester")\nitems = Records("Spring semester", "table")',
 };

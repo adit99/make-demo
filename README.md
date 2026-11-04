@@ -1,12 +1,16 @@
-# Make
+# Make family planner
 
-[Demo](https://adit99.github.io/make-demo/) · [Three-page deck](https://adit99.github.io/make-demo/deck/)
+[Demo](https://adit99.github.io/make-demo/) · [Deck](https://adit99.github.io/make-demo/deck/)
 
-One table, three actions: make a checklist, add child and backup fields, attach a fictional school email. The email supplies 70 dated semester events, with breaks excluded. Existing items and edits are preserved.
+One family planner, three moments:
 
-React and OpenUI render prepared outputs. CRUD, schema changes, recurrence expansion, search and filters work locally. Data persists in this browser. Sharing is a labeled simulation. There are no live model calls or inbox connections in the public demo. The separate `adit99/make.app` prototype has real model calls, SQLite and invitations.
+1. **Make from a prompt.** A school-pickup and after-school planner for Maya and Leo, starting with nine entries for January 11–15, 2027.
+2. **Edit from a prompt.** Add backup people, pickup locations or notes as real fields. Existing records, completion status and assignments survive.
+3. **Attach context.** A fictional, unstructured email supplies the entire semester. Its prepared interpretation expands to 154 dated pickups and activities, including one-off events and school closures. The nine existing entries are enriched without duplicates or overwriting edited values.
 
-The deck uses two user-supplied Lovable screenshots (Frogs in Mugs and FRIDG) to discuss building versus distribution. Original images are linked from the slide. The Make idea is apps in one shared product, with structured UI at the core. Chat, live email and SMS remain future direction.
+This public React/OpenUI demo uses prepared AI output and limited prompt routing, not live model calls or arbitrary prompt generation. Supported edit requests add backup, location and notes fields. CRUD, schema migration, recurrence expansion, filtering and local persistence work. Sharing is a labeled simulation. The separate `adit99/make.app` prototype has real model calls, SQLite and invitations.
+
+The four-slide deck identifies the AI hobbyist, presents the generative UI thesis, uses two user-supplied Lovable screenshots to discuss distribution, and explains apps in one shared product. Chat, live email and SMS remain future direction.
 
 ## Develop
 
@@ -18,8 +22,8 @@ npm run build
 python3 -m http.server 4174 --directory dist
 ```
 
-Source: `site/src`. Deck: `site/public/deck`. Sample email: `site/public/examples/spring-semester.eml`. Vite serves the deck at `/deck/index.html`; the static build supports `/deck/`.
+Source: `site/src`. Deck: `site/public/deck`. Fictional email: `site/public/examples/spring-semester.eml`. Vite serves the deck at `/deck/index.html`; the static build supports `/deck/`.
 
 GitHub Pages serves the root of `main`. Build, replace generated root assets with `dist/` contents, then commit and push. Keep `.nojekyll`. Never include environment files or backend keys.
 
-Tests cover the complete semester, breaks, two events on May 20, data preservation and duplicate prevention.
+Tests cover all semester occurrences, closures, overlapping events, prompt-to-field changes, edited data preservation, source enrichment and idempotent import.

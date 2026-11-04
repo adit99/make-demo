@@ -28,6 +28,10 @@ import {
 } from "lucide-react";
 import {
   EMAIL,
+  CREATE_PROMPT,
+  EDIT_PROMPT,
+  editFields,
+  semesterRecords,
   BASE_FIELDS,
   EXTRA_FIELDS,
   TIME_FIELDS,
@@ -37,14 +41,14 @@ import {
   programs,
 } from "./data.js";
 import "./style.css";
-const KEY = "make-simple-v4";
+const KEY = "make-family-v5";
 const fresh = () => ({
   version: 0,
   records: [],
   fields: [],
   attached: false,
   shared: false,
-  name: "Our school checklist",
+  name: "Family planner",
 });
 const load = () => {
   try {
@@ -66,6 +70,7 @@ function useApp() {
 const dateLabel = (value) =>
   value
     ? new Date(value + "T12:00:00Z").toLocaleDateString("en-US", {
+        weekday: "short",
         month: "short",
         day: "numeric",
         timeZone: "UTC",
@@ -103,6 +108,7 @@ function MonthsView() {
 }
 function RecordsView({ title }) {
   const { data, setData, onEdit, onSource, month, preview, viewer } = useApp();
+  const hasField = (key) => data.fields.some((f) => f.key === key);
   const [search, setSearch] = useState("");
   const [child, setChild] = useState("all");
   const [page, setPage] = useState(1);
@@ -184,11 +190,13 @@ function RecordsView({ title }) {
               <th className="check-col">
                 <span className="sr-only">Done</span>
               </th>
-              <th>{data.version === 1 ? "Task" : "Task or activity"}</th>
-              {data.version >= 2 && <th>Child</th>}
-              <th>Date{data.version === 3 ? " & time" : ""}</th>
-              <th>Who</th>
-              {data.version >= 2 && <th>Backup</th>}
+              <th>Activity</th>
+              <th>Child</th>
+              <th>When</th>
+              <th>Pickup</th>
+              {hasField("backup") && <th>Backup</th>}
+              {hasField("location") && <th>Pickup location</th>}
+              {hasField("notes") && <th>Notes</th>}
               <th>
                 <span className="sr-only">Edit</span>
               </th>
@@ -228,28 +236,34 @@ function RecordsView({ title }) {
                     </button>
                   )}
                 </td>
-                {data.version >= 2 && (
+                {
                   <td>
                     <span>{r.child || "—"}</span>
                   </td>
-                )}
+                }
                 <td>
                   <span>{dateLabel(r.date)}</span>
-                  {data.version === 3 && (
+                  {
                     <small>
                       {r.time
-                        ? `${timeLabel(r.time)} – ${timeLabel(r.endtime)}`
+                        ? `${timeLabel(r.time)}${r.endtime ? " – " + timeLabel(r.endtime) : ""}`
                         : ""}
                     </small>
-                  )}
+                  }
                 </td>
                 <td>
                   <span className={`person ${r.person === "Sam" ? "sam" : ""}`}>
                     {r.person || "Unassigned"}
                   </span>
                 </td>
-                {data.version >= 2 && (
+                {hasField("backup") && (
                   <td className="backup">{r.backup || "—"}</td>
+                )}
+                {hasField("location") && (
+                  <td className="location">{r.location || "—"}</td>
+                )}
+                {hasField("notes") && (
+                  <td className="location">{r.notes || "—"}</td>
                 )}
                 <td>
                   <button
@@ -387,6 +401,14 @@ function Modal({ title, children, onClose, wide = false }) {
 }
 function App() {
   const [data, setData] = useState(load);
+  const [prompt, setPrompt] = useState(() =>
+    load().version === 0
+      ? CREATE_PROMPT
+      : load().version === 1
+        ? EDIT_PROMPT
+        : "",
+  );
+  const [promptError, setPromptError] = useState("");
   const [month, setMonth] = useState("all");
   const [modal, setModal] = useState("");
   const [editing, setEditing] = useState(null);
@@ -407,36 +429,64 @@ function App() {
     return () => clearTimeout(t);
   }, [toast]);
   function build() {
+    if (!/school|pick.?up|after.?school/i.test(prompt)) {
+      setPromptError(
+        "This guided demo makes Maya and Leo’s school planner. Try the sample prompt.",
+      );
+      return;
+    }
     setData({
       ...data,
       version: 1,
       fields: [...BASE_FIELDS],
       records: INITIAL_RECORDS.map((r) => ({ ...r })),
     });
+    setPrompt(EDIT_PROMPT);
+    setPromptError("");
   }
   function evolve() {
-    const fields = [...BASE_FIELDS, ...EXTRA_FIELDS];
-    setData({
-      ...data,
-      version: 2,
-      fields,
-      records: migrate(data.records, fields),
-    });
-    setToast("Child and backup added. Your items are kept.");
+    try {
+      const fields = editFields(prompt, data.fields);
+      setData({
+        ...data,
+        version: Math.max(2, data.version),
+        fields,
+        records: migrate(data.records, fields),
+      });
+      setToast(
+        fields
+          .slice(data.fields.length)
+          .map((f) => f.label)
+          .join(" + ") + " added. Your plans are kept.",
+      );
+      setPrompt("");
+      setPromptError("");
+    } catch (error) {
+      setPromptError(error.message);
+    }
   }
   function importAll() {
-    const fields = [...BASE_FIELDS, ...EXTRA_FIELDS, ...TIME_FIELDS];
+    const fields = [
+      ...data.fields,
+      ...[...BASE_FIELDS, ...EXTRA_FIELDS, ...TIME_FIELDS].filter(
+        (f) => !data.fields.some((p) => p.key === f.key),
+      ),
+    ];
     setData({
       ...data,
       version: 3,
       fields,
       records: migrate(importSemester(data.records), fields),
       attached: true,
-      name: "School planner",
+      name: "Family planner",
     });
     setModal("");
     setMonth("all");
-    setToast("70 events added. School breaks included.");
+    setPrompt("");
+    setPromptError("");
+    setToast(
+      `Full semester ready: ${semesterRecords().length} pickups and activities.`,
+    );
   }
   const runtime = {
     data,
@@ -463,7 +513,7 @@ function App() {
       </header>
       <main className="workspace">
         <div className="app-heading">
-          <h1>{data.version === 3 ? "School planner" : "School checklist"}</h1>
+          <h1>Family planner</h1>
           {data.version > 0 && (
             <button
               className="button secondary"
@@ -474,32 +524,42 @@ function App() {
             </button>
           )}
         </div>
-        <div className="actions" aria-label="Try the demo">
-          <button
-            className="button"
-            disabled={data.version > 0}
-            onClick={build}
-          >
-            {data.version > 0 ? <Check size={16} /> : <Plus size={16} />}Make a
-            checklist
+        <form
+          className="prompt-form"
+          onSubmit={(e) => {
+            e.preventDefault();
+            data.version ? evolve() : build();
+          }}
+        >
+          <textarea
+            aria-label={data.version ? "Edit app prompt" : "Make app prompt"}
+            rows={2}
+            value={prompt}
+            maxLength={500}
+            onChange={(e) => {
+              setPrompt(e.target.value);
+              setPromptError("");
+            }}
+            placeholder="Change this app…"
+          />
+          <button className="button" disabled={!prompt.trim()} type="submit">
+            {data.version ? "Edit app" : "Make app"}
+            <ArrowRight size={16} />
           </button>
-          <button
-            className="button secondary"
-            disabled={!data.version || data.version >= 2}
-            onClick={evolve}
-          >
-            {data.version >= 2 ? <Check size={16} /> : <Plus size={16} />}Add
-            child & backup
-          </button>
-          <button
-            className="button secondary"
-            disabled={!data.version}
-            onClick={() => setModal("email")}
-          >
-            <Paperclip size={16} />
-            {data.attached ? "School email" : "Attach school email"}
-          </button>
-        </div>
+        </form>
+        {promptError && (
+          <p className="prompt-error" role="alert">
+            {promptError}
+          </p>
+        )}
+        {data.version > 0 && (
+          <div className="context-action">
+            <button className="text-button" onClick={() => setModal("email")}>
+              <Paperclip size={15} />
+              {data.attached ? "School email" : "Attach school email"}
+            </button>
+          </div>
+        )}
         {storageError && (
           <p role="alert">Changes could not be saved in this browser.</p>
         )}
@@ -533,7 +593,7 @@ function App() {
           </div>
         )}
         <footer className="demo-footer">
-          <span>Demo · sample AI output · edits saved here</span>
+          <span>Guided demo · prepared AI output · edits saved here</span>
           <button className="text-button" onClick={() => setModal("reset")}>
             Reset
           </button>
@@ -558,7 +618,9 @@ function App() {
               disabled={data.version === 3}
               onClick={importAll}
             >
-              {data.version === 3 ? "Added to planner" : "Add semester to app"}
+              {data.version === 3
+                ? "Added to planner"
+                : "Build the full semester"}
             </button>
           </div>
         </Modal>
@@ -609,6 +671,8 @@ function App() {
               className="button"
               onClick={() => {
                 setData(fresh());
+                setPrompt(CREATE_PROMPT);
+                setPromptError("");
                 setModal("");
                 setMonth("all");
                 setViewer("Alex");
