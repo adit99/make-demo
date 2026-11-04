@@ -1,32 +1,27 @@
 <!doctype html>
 <html lang="en">
-<head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f5f5f0">
-<title>Make — Apps for the life you share</title><meta name="description" content="An interactive Make demo: turn sample calendar and email context into a shared family pickup planner, trip itinerary, or household tracker."><meta property="og:title" content="Make — Apps for the life you share"><meta property="og:description" content="Make a shared app from everyday context. Try the guided demo. No account or AI costs."><meta property="og:type" content="website">
-<link rel="stylesheet" href="styles.css"><script src="app.js" defer></script>
-</head>
-<body>
-<svg class="svg-defs" aria-hidden="true"><defs>
-<symbol id="spark" viewBox="0 0 24 24"><path d="m12 3 2.5 6.5L21 12l-6.5 2.5L12 21l-2.5-6.5L3 12l6.5-2.5Z"/></symbol>
-<symbol id="plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol><symbol id="arrow" viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6"/></symbol><symbol id="back" viewBox="0 0 24 24"><path d="m14 6-6 6 6 6"/></symbol><symbol id="check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol><symbol id="close" viewBox="0 0 24 24"><path d="m6 6 12 12M6 18 18 6"/></symbol>
-<symbol id="calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M7 3v4m10-4v4M3 11h18m-13 4h2m4 0h2m-8 3h2"/></symbol>
-<symbol id="mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m3 7 9 6 9-6"/></symbol>
-<symbol id="people" viewBox="0 0 24 24"><circle cx="9" cy="7" r="3"/><path d="M3 21v-3a6 6 0 0 1 12 0v3M16 4a3 3 0 0 1 0 6m2 4a5 5 0 0 1 3 4v3"/></symbol>
-<symbol id="home" viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v11H3Zm6 11v-8h6v8"/></symbol>
-<symbol id="trip" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="15" rx="3"/><path d="M9 6V3h6v3M7 6v15M17 6v15"/></symbol>
-<symbol id="pickup" viewBox="0 0 24 24"><path d="m4 9 2-5h12l2 5M3 10h18v8H3Zm3 8v3m12-3v3M6 14h2m8 0h2"/></symbol>
-<symbol id="edit" viewBox="0 0 24 24"><path d="m15 4 5 5M3 21l1-6L16 3a2 2 0 0 1 3 0l2 2a2 2 0 0 1 0 3L9 20Z"/></symbol>
-<symbol id="lock" viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="11" rx="3"/><path d="M8 10V7a4 4 0 0 1 8 0v3m-4 5v2"/></symbol>
-<symbol id="share" viewBox="0 0 24 24"><path d="M8 12H5v9h14v-9h-3M12 16V3m-4 4 4-4 4 4"/></symbol>
-<symbol id="history" viewBox="0 0 24 24"><path d="M3 11a9 9 0 1 1 2 7M3 4v7h7m2-4v5l3 2"/></symbol>
-<symbol id="info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6m0-10h.01"/></symbol>
-<symbol id="pin" viewBox="0 0 24 24"><path d="M19 10c0 5-7 12-7 12S5 15 5 10a7 7 0 0 1 14 0Z"/><circle cx="12" cy="10" r="2"/></symbol>
-<symbol id="alert" viewBox="0 0 24 24"><path d="m12 3 10 18H2Zm0 6v5m0 3h.01"/></symbol>
-<symbol id="link" viewBox="0 0 24 24"><path d="m10 14 4-4m-6 6-2 2a4 4 0 0 1-6-6l5-5a4 4 0 0 1 6 0m2 2 2-2a4 4 0 0 1 6 6l-5 5a4 4 0 0 1-6 0" transform="translate(2 -2)"/></symbol>
-<symbol id="file" viewBox="0 0 24 24"><path d="M14 2H4v20h16V8Zm0 0v6h6M8 13h8m-8 4h5"/></symbol>
-<symbol id="clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
-</defs></svg>
-<header class="topbar"><a href="#" class="brand" aria-label="Make demo home"><span class="brand-icon"><svg><use href="#spark"/></svg></span>make<span class="brand-dot">.</span></a><div class="top-right"><span class="demo-tag"><i></i>Guided product demo</span><button class="button small subtle" data-action="share-link" aria-label="Share demo link"><svg><use href="#share"/></svg><span>Share demo</span></button></div></header>
-<div class="layout"><aside class="sidebar"><div><p class="eyebrow">YOUR APPS</p><nav class="app-nav" id="app-nav" aria-label="Demo apps"></nav></div><div class="walkthrough" id="walkthrough"></div><div class="sidebar-bottom"><p><svg><use href="#info"/></svg><span>Sample people, emails, and calendars. No live connections or AI requests.</span></p><button class="text-button" data-action="reset">Reset demo</button></div></aside><main id="workspace" tabindex="-1"></main></div>
-<div id="modal-root"></div><div id="toast" role="status" aria-live="polite"></div>
-</body></html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#274f45" />
+    <title>Make — create, change, connect</title>
+    <meta
+      name="description"
+      content="Three interactive demos: make a structured app, evolve its data model, and turn a semester email into a complete school planner."
+    />
+    <meta
+      property="og:title"
+      content="Make — software for the life you share"
+    />
+    <meta
+      property="og:description"
+      content="Create an app. Change its structure. Build from context. Try the guided demo and read the idea."
+    />
+    <link rel="icon" href="./icon.svg" type="image/svg+xml" />
+    <script type="module" crossorigin src="./assets/index-DpzavLIg.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-BWbmaDff.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>

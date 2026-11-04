@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#244b40" />
+    <title>Make — a home for personal software</title>
+    <meta
+      name="description"
+      content="Make: structured interfaces people can create, change, and share, with context and agentic capabilities around them."
+    />
+    <link rel="icon" href="../icon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="deck.css" />
+  </head>
+  <body>
+    <header class="deck-header">
+      <a href="../" class="brand">make<span>.</span></a
+      ><a href="../">Try the interactive demo ↗</a>
+    </header>
+    <main>
+      <section
+        class="slide cover"
+        data-slide="1"
+        aria-label="1. A home for personal software"
+      >
+        <div class="cover-copy">
+          <p class="eyebrow">A HOME FOR PERSONAL SOFTWARE</p>
+          <h1>Make the software<br />your life needs.</h1>
+          <p class="subtitle">
+            Create it. Change it. Use it together.<br />All inside one shared
+            product.
+          </p>
+          <p class="byline">Aditya Jayaraman · an exploration</p>
+        </div>
+        <div class="cover-statement">
+          <span>THE BELIEF</span>
+          <p>
+            Small groups should be able to shape their own tools—and keep using
+            them as their needs change.
+          </p>
+        </div>
+      </section>
+      <section
+        class="slide"
+        data-slide="2"
+        aria-label="2. Three progressive demonstrations"
+        hidden
+      >
+        <div class="slide-intro">
+          <p class="eyebrow">THE PRODUCT</p>
+          <h2>One app, becoming<br />more useful.</h2>
+        </div>
+        <div class="demo-sequence">
+          <a href="../#create"
+            ><span class="number">01</span>
+            <div>
+              <h3>Make an app</h3>
+              <p>
+                A request becomes a clear hierarchy: summary, table, fields,
+                actions.
+              </p>
+            </div>
+            <span class="arrow">↗</span></a
+          ><a href="../#edit"
+            ><span class="number">02</span>
+            <div>
+              <h3>Change the data model</h3>
+              <p>
+                Add fields and evolve the interface. Preserve the records people
+                already use.
+              </p>
+            </div>
+            <span class="arrow">↗</span></a
+          ><a href="../#context"
+            ><span class="number">03</span>
+            <div>
+              <h3>Bring in context</h3>
+              <p>
+                A semester email becomes a complete school planner, with
+                recurring events and exceptions.
+              </p>
+            </div>
+            <span class="arrow">↗</span></a
+          >
+        </div>
+        <p class="footnote">
+          Public walkthrough: prepared AI outputs, functional local
+          interactions, and a fictional email. The working local prototype uses
+          real model calls and server-backed records.
+        </p>
+      </section>
+      <section
+        class="slide wedge"
+        data-slide="3"
+        aria-label="3. Structured UX and agentic capabilities"
+        hidden
+      >
+        <div class="slide-intro">
+          <p class="eyebrow">THE CORE WEDGE</p>
+          <h2>
+            Structured UX people can use.<br />Agents that work around it.
+          </h2>
+          <p class="subtitle small">
+            Tables, forms, calendars, and fields give people a stable place to
+            see, decide, and act.
+          </p>
+        </div>
+        <div class="channel-row">
+          <div>
+            <span>CHAT</span>
+            <p>Ask for a change.<br />Clarify what is missing.</p>
+          </div>
+          <div>
+            <span>EMAIL</span>
+            <p>Bring in a schedule.<br />Propose a relevant update.</p>
+          </div>
+          <div>
+            <span>SMS</span>
+            <p>Coordinate a handoff.<br />Confirm a completed task.</p>
+          </div>
+        </div>
+        <div class="principle">
+          <strong>The app is the shared state.</strong>
+          <p>
+            Agents and communication channels operate on the same records and
+            permissions. Changes that matter stay visible and reviewable.
+          </p>
+        </div>
+        <p class="footnote">
+          Product direction: autonomous actions, chat conversations, live email
+          integration, and SMS are proposed capabilities. Today, the prototype
+          supports imported context and AI app creation/editing.
+        </p>
+      </section>
+      <section
+        class="slide"
+        data-slide="4"
+        aria-label="4. A common environment for every app"
+        hidden
+      >
+        <div class="slide-intro">
+          <p class="eyebrow">THE TECHNICAL BET</p>
+          <h2>Every new app inherits<br />the place it lives.</h2>
+        </div>
+        <div class="architecture">
+          <div class="architecture-line">
+            <span>WHAT PEOPLE SHAPE</span>
+            <p>The interface, fields, views, and useful actions.</p>
+          </div>
+          <div class="architecture-line">
+            <span>WHAT MAKE PROVIDES</span>
+            <p>
+              Persistent records, identity, sharing, permissions, and context.
+            </p>
+          </div>
+          <div class="architecture-line">
+            <span>WHAT THE MODEL DOES</span>
+            <p>
+              Compose the interface and interpret context. Everyday controls run
+              as ordinary software.
+            </p>
+          </div>
+        </div>
+        <p class="closing-line">
+          A new household tool is another app in Make, with no separate hosting
+          or distribution setup for its creator.
+        </p>
+        <p class="footnote">
+          Implemented locally with React, OpenUI, a Node API, SQLite, and
+          app-scoped invitations. Public hosting of the working backend and
+          production identity are still ahead.
+          <a
+            href="https://www.openui.com/docs/openui-lang/architecture"
+            target="_blank"
+            rel="noopener noreferrer"
+            >OpenUI architecture ↗</a
+          >
+        </p>
+      </section>
+      <section
+        class="slide closing"
+        data-slide="5"
+        aria-label="5. The next experiment"
+        hidden
+      >
+        <div class="slide-intro">
+          <p class="eyebrow">START WITH HOUSEHOLDS</p>
+          <h2>A small proving ground.<br />A much larger possibility.</h2>
+          <p class="subtitle small">
+            Families have recurring needs, shared context, and tools that need
+            to change.
+          </p>
+        </div>
+        <div class="questions">
+          <p><span>01</span>Will people come back and use what they make?</p>
+          <p><span>02</span>Will another person join and contribute?</p>
+          <p><span>03</span>Can the app evolve without losing their work?</p>
+        </div>
+        <div class="closing-bottom">
+          <p>
+            The hypothesis: useful personal software can accumulate inside one
+            trusted environment, serving households and eventually other small
+            groups.
+          </p>
+          <a class="demo-button" href="../">Try the three demos ↗</a>
+        </div>
+        <p class="footnote">
+          Next: test repeated use with a small group of households. No adoption,
+          revenue, or market-size claims are implied by this prototype.
+        </p>
+      </section>
+    </main>
+    <footer class="controls">
+      <span class="deck-name">MAKE / THE IDEA</span>
+      <div>
+        <button id="previous" aria-label="Previous slide">←</button
+        ><span id="progress" aria-live="polite">1 / 5</span
+        ><button id="next" aria-label="Next slide">→</button>
+      </div>
+      <button id="print" class="print">Print / PDF</button>
+    </footer>
+    <script src="deck.js"></script>
+  </body>
+</html>

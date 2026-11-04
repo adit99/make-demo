@@ -1,49 +1,35 @@
-# Make — context-aware shared app demo
+# Make — three progressive demos
 
-A static guided product demo, published at https://adit99.github.io/make-demo/.
+[Interactive demo](https://adit99.github.io/make-demo/) · [Five-slide deck](https://adit99.github.io/make-demo/deck/)
 
-The main story turns sample email/calendar context into a structured family pickup planner. Alternate examples show a trip itinerary with a packing list and a household tracker with maintenance tasks.
+A React/OpenUI guided demonstration of one app becoming more useful:
 
-## Run locally
+1. **Make an app:** a school checklist with a summary, table, four typed fields, and working controls.
+2. **Change its data model:** add child, type, location, and backup fields. Preserve IDs, values, completion status, and edits; initialize new fields explicitly.
+3. **Build from context:** attach a manufactured semester email. Expand four recurring activities, three one-off events, and holiday/break exclusions into **70 dated events** from January through May 2027. Keep existing tasks.
 
-Serve the repository root:
+The public demo uses prepared OpenUI programs, fictional data, and browser local storage. Editing, filtering, pagination, recurrence expansion and schema migration run locally. The family-view switch is explicitly simulated. No API calls, keys, live inboxes, or cross-device collaboration are included here. Use **Start again** to reset the guided example.
+
+The separate `adit99/make.app` React prototype has real model generation/editing, email import, SQLite persistence, and app-scoped invitations. GitHub Pages cannot host its API/database.
+
+The deck leads with structured UX and describes agents, chat, live email and SMS as product direction. It is a lightweight conversation aid with demo links, arrow-key navigation and print styles.
+
+## Develop
 
 ```sh
-python3 -m http.server 4173 --bind 127.0.0.1
+npm ci
+npm run dev
+npm test
+npm run build
+python3 -m http.server 4174 --directory dist
 ```
 
-Open http://127.0.0.1:4173/. No installation or build step is required. Edit `index.html`, `styles.css`, and `app.js`.
+React source: `site/src`. Browser deck: `site/public/deck`. Sample email: `site/public/examples/spring-semester.eml`.
 
-## Main walkthrough
+Vite development serves the deck at `/deck/index.html`; the built static site supports `/deck/`.
 
-1. Create the pickup planner from the sample family calendar and school-email excerpts.
-2. Inspect card provenance and the selected source context.
-3. Share the app with Sam in the demo, then switch between Alex's full board and Sam's own pickups.
-4. Simulate a school email announcing early dismissal. The schedule remains unchanged until the visitor reviews and applies the proposal.
-5. See the availability conflict, reassign the pickup, and observe the same record in both family views.
-6. Preview and apply an edit that adds backup people and pickup confirmations while retaining all records.
-7. Reopen the demo or restore an earlier layout: the records persist.
+## Publish
 
-## Other examples
+GitHub Pages serves the root of `main`. Run `npm run build`, copy the contents of `dist/` to the repository root, and commit the generated `index.html`, `assets/`, `deck/`, `examples/`, and `icon.svg` alongside source changes. Keep `.nojekyll`. Do not publish environment files or a backend key.
 
-- **Weekend away:** sample reservations and calendar events become an itinerary; visitors can complete packing tasks, add items, assign people, inspect sources, and add reservation-code and note fields.
-- **Home file:** sample receipts and service reminders become appliance records and maintenance tasks; visitors can complete and assign tasks and add serial-number and note fields.
-
-## What is simulated
-
-People, source excerpts, calendar availability, invitations, generation, and external updates are prepared demo data. Family-view switching demonstrates shared state in one browser; it is not authenticated, cross-device collaboration. No emails, calendar changes, invitations, bookings, or model requests are sent. Sources are fixed illustrative snapshots, not live accounts.
-
-App records and interface versions persist in localStorage under `make-context-demo-v2`. A reset affects only that demo state in the current browser. Private source accounts are never connected. No credentials or backend are included. Google Fonts loads optional typefaces, with system-font fallbacks.
-
-## Publishing
-
-GitHub Pages serves the default branch at its root. Commit and push the three app files and any documentation updates. `.openai`, `dist`, `output`, and environment files are ignored and not published.
-
-## Validation
-
-- JavaScript syntax check (`node --check app.js`).
-- Browser walkthrough: creation, sharing, both family views, pending source update, conflict detection, reassignment, preview/apply edit, backup field, pickup confirmation, reload persistence, and layout restore.
-- Trip packing completion and item creation.
-- Household task completion and source inspection.
-
-The demo is independent of the native Expo app repository.
+Tests verify all 70 occurrences, exclusions, simultaneous events on May 20, record preservation, and idempotent imports. Browser QA covers the three-step flow, editing, reload persistence, the final month, and the deck.
