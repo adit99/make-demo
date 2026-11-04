@@ -589,7 +589,7 @@ function App() {
               className="button"
               onClick={() => {
                 setData({ ...data, shared: !data.shared });
-                setViewer("Sam");
+                setViewer(data.shared ? "Alex" : "Sam");
                 setModal("");
               }}
             >
